@@ -25,6 +25,7 @@ def execute_sql(sql, values=(), commit=False,single=False):
     cursor.close()
     return results
 
+app = Flask(__name__)
 
 @app.teardown_appcontext
 def close_connection(exception):
@@ -32,8 +33,6 @@ def close_connection(exception):
      if connection is not None:
          connection.close()
 
-
-app = Flask(__name__)
 
 @app.route('/')
 @app.route('/jobs')
