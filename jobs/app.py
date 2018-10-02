@@ -1,13 +1,13 @@
 import sqlite3
 from flask import Flask, render_template, g
 
-PATH="db/jobs.sqllite"
+PATH = 'db/jobs.sqllite'
 
 def open_connection():
     connection = getattr(g, '_connection', None)
     if connection == None:
         connection = g._connection = sqlite3.connect(PATH)
-    connection.row_factory = sqlite3.row
+    connection.row_factory = sqlite3.Row
     return connection
 
 
@@ -17,10 +17,7 @@ def execute_sql(sql, values=(), commit=False,single=False):
     if commit == True:
         results = connection.commit()
     else:
-        results = cursor.getchone()  \
-            if single\
-            else\
-            cursor.fetchall()
+        results = cursor.getchone()  if single else cursor.fetchall()
 
     cursor.close()
     return results
