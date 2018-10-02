@@ -7,19 +7,23 @@ def open_connection():
     connection = getattr(g, '_connection', None)
     if connection == None:
         connection = g._connection = sqlite3.connect(PATH)
-    connection.row_factory = sqllite3.row
+    connection.row_factory = sqlite3.row
     return connection
 
 
 def execute_sql(sql, values=(), commit=False,single=False):
     connection = open_connection()
     cursor = connection.execute(sql, values)
-        if commit == True:
-            results = connection.commit()
-        else:
-            results = cursor.getchone()  if single else cursor.fetchall()
-   cursor.close()
-   return results
+    if commit == True:
+        results = connection.commit()
+    else:
+        results = cursor.getchone()  \
+            if single\
+            else\
+            cursor.fetchall()
+
+    cursor.close()
+    return results
 
 
 @app.teardown_appcontext
