@@ -1,7 +1,7 @@
 import sqlite3
 from flask import Flask, render_template, g
 
-PATH = 'db/jobs.sqlite'
+PATH = 'C://Users//IBM_ADMIN//Documents//GitHub//PythonFlask-JobBoard//db//jobs.sqlite'
 
 def open_connection():
     connection = getattr(g, '_connection', None)
