@@ -54,7 +54,7 @@ def employer(employer_id):
     return render_template('employer.html',employer=employer,jobs=jobs,reviews=reviews)
 
 
-@app.route('/employer/<employer_id>/review',method=('GET','POST'))
+@app.route('/employer/<employer_id>/review',Method=('GET','POST'))
 def review(employer_id):
     if request.method == 'POST':
         review = request.form['review']
@@ -66,5 +66,5 @@ def review(employer_id):
         execute_sql('INSERT INTO review (review, rating, title, date, status, employer_id) VALUES (?, ?, ?, ?, ?, ?)',
                     (review, rating, title, date, status, employer_id),commit=True)
 
-        return redirect(url_for('employer',employer_id=employer_id))            
+        return redirect(url_for('employer',employer_id=employer_id))
     return render_template('review.html',employer_id=employer_id)
